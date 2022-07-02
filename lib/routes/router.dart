@@ -1,4 +1,5 @@
 import 'package:bloc_practice/views/authentication/splash.dart';
+import 'package:bloc_practice/views/dashboard/components/project.dart';
 import 'package:bloc_practice/views/dashboard/dashbaord_view.dart';
 import 'package:bloc_practice/views/dashboard/home/all_projects.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,8 @@ class Routers {
   static const String loginScreen = '/login';
   static const String signupScreen = '/signup';
   static const String dashboardScreen = '/dashboard';
-  static const String allProjectsScreen = '/allTask';
+  static const String allProjectsScreen = '/allproject';
+  static const String projectScreen = '/project';
 
   static Route<dynamic> onGenerateRoutes(RouteSettings settings) {
     switch (settings.name) {
@@ -30,6 +32,8 @@ class Routers {
         return MaterialPageRoute(builder: (contex) => const DashBoardScreen());
       case allProjectsScreen:
         return MaterialPageRoute(builder: (contex) => const AllProjects());
+      case projectScreen:
+        return MaterialPageRoute(builder: (contex) => const Projects());
       default:
         throw const FormatException('Routes not found');
     }

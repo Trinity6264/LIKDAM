@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:getwidget/getwidget.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../constant/color_pallet.dart';
 
@@ -27,9 +29,9 @@ class HigherProgressCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Great, your progress is almost done!!',
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                     color: whiteColor,
                     fontSize: 20,
                   ),
@@ -40,9 +42,9 @@ class HigherProgressCard extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     primary: whiteColor,
                   ),
-                  child: const Text(
+                  child: Text(
                     'View Project',
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       color: primaryColor,
                       fontWeight: FontWeight.w500,
                     ),
@@ -53,10 +55,23 @@ class HigherProgressCard extends StatelessWidget {
           ),
           Expanded(
             flex: 1,
-            child: Container(
-              decoration: const BoxDecoration(
-                color: whiteColor,
-                shape: BoxShape.circle,
+            child: GFProgressBar(
+              backgroundColor: whiteColor.withOpacity(.5),
+              progressBarColor: whiteColor,
+              progressHeadType: GFProgressHeadType.circular,
+              type: GFProgressType.circular,
+              percentage: 0.72,
+              radius: 100.0,
+              circleWidth: 12,
+              autoLive: true,
+              animation: true,
+              child: Text(
+                '72%',
+                style: GoogleFonts.poppins(
+                  fontSize: 20.0,
+                  color: whiteColor,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
           ),

@@ -4,11 +4,13 @@ import '../constant/color_pallet.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
+  final FocusNode? focusNode;
   final String hintText;
   const CustomTextField({
     Key? key,
     required this.controller,
     required this.hintText,
+    this.focusNode,
   }) : super(key: key);
 
   @override
@@ -33,6 +35,7 @@ class CustomTextField extends StatelessWidget {
           ),
           child: TextField(
             controller: controller,
+            focusNode: focusNode,
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: hintText,

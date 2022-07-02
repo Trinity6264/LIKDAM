@@ -1,9 +1,13 @@
 import 'package:bloc_practice/constant/color_pallet.dart';
 import 'package:bloc_practice/navigation/nav.dart';
 import 'package:bloc_practice/routes/router.dart';
+import 'package:bloc_practice/service/service_locator.dart';
 import 'package:bloc_practice/utils/custom_button.dart';
 import 'package:bloc_practice/utils/custom_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../logic/auth/login/cubit/login_cubit.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -14,12 +18,18 @@ class LoginScreen extends StatefulWidget {
 
 class LoginScreenState extends State<LoginScreen> {
   late TextEditingController usernameController;
+  late FocusNode usernameNode;
   late TextEditingController passwordController;
+  late FocusNode passwordNode;
+
+  final _service = locator.get<NavigationServices>();
 
   @override
   void initState() {
     usernameController = TextEditingController();
     passwordController = TextEditingController();
+    usernameNode = FocusNode();
+    passwordNode = FocusNode();
     super.initState();
   }
 
@@ -28,7 +38,11 @@ class LoginScreenState extends State<LoginScreen> {
     super.dispose();
     usernameController.dispose();
     passwordController.dispose();
+    usernameNode.dispose();
+    passwordNode.dispose();
   }
+
+  bool isKeepLogin = true;
 
   @override
   Widget build(BuildContext context) {
@@ -70,11 +84,13 @@ class LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   CustomTextField(
+                    focusNode: usernameNode,
                     controller: usernameController,
                     hintText: 'Username',
                   ),
                   SizedBox(height: size.height * .04),
                   CustomTextField(
+                    focusNode: passwordNode,
                     controller: passwordController,
                     hintText: 'Password',
                   ),
@@ -82,9 +98,13 @@ class LoginScreenState extends State<LoginScreen> {
                   Row(
                     children: [
                       Checkbox(
-                        value: true,
+                        value: isKeepLogin,
                         activeColor: primaryColor,
-                        onChanged: (val) {},
+                        onChanged: (val) {
+                          setState(() {
+                            isKeepLogin = !isKeepLogin;
+                          });
+                        },
                       ),
                       const Text(
                         'Keep me login',
@@ -98,11 +118,35 @@ class LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   SizedBox(height: size.height * .02),
-                  CustomButton(
-                    onPressed: () => NavigationServices().replaceStack(
-                      Routers.dashboardScreen,
-                    ),
-                    title: 'Login',
+                  BlocBuilder<LoginCubit, LoginState>(
+                    builder: (context, state) {
+                      if (state is LoginLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      return CustomButton(
+                        onPressed: () {
+                          passwordNode.unfocus();
+                          usernameNode.unfocus();
+                          if (passwordController.text.length < 6) {
+                            _service.showBanner(
+                                'Password must be more than 5+ char');
+                            return;
+                          } else if (usernameController.text.length < 3) {
+                            _service.showBanner(
+                              'Username must be more than 2+ char',
+                            );
+                            return;
+                          }
+                          context.read<LoginCubit>().loginUser(
+                                username: usernameController.text.trim(),
+                                password: passwordController.text.trim(),
+                              );
+                        },
+                        title: 'Login',
+                      );
+                    },
                   ),
                 ],
               ),

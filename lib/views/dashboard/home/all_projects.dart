@@ -1,6 +1,9 @@
 import 'package:bloc_practice/constant/color_pallet.dart';
 import 'package:bloc_practice/navigation/nav.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/components/progress_bar/gf_progress_bar.dart';
+import 'package:getwidget/types/gf_progress_type.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AllProjects extends StatefulWidget {
   const AllProjects({Key? key}) : super(key: key);
@@ -14,7 +17,6 @@ class _AllProjectsState extends State<AllProjects> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: whiteBgColor,
       body: Container(
         width: double.infinity,
         margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -40,7 +42,6 @@ class _AllProjectsState extends State<AllProjects> {
                 const Text(
                   'UI Design',
                   style: TextStyle(
-                    color: blackColor,
                     fontWeight: FontWeight.bold,
                     fontSize: 20.0,
                   ),
@@ -73,7 +74,6 @@ class _AllProjectsState extends State<AllProjects> {
                     width: double.infinity,
                     height: size.height * .2,
                     child: Card(
-                      color: whiteColor,
                       elevation: 5.0,
                       shadowColor: primaryColor.withOpacity(0.5),
                       child: Row(
@@ -148,45 +148,24 @@ class _AllProjectsState extends State<AllProjects> {
                                 ),
                                 Expanded(
                                   flex: 2,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      AnimatedContainer(
-                                        duration: const Duration(
-                                          milliseconds: 300,
-                                        ),
-                                        width: size.width * .3,
-                                        height: size.height * .1,
-                                        decoration: BoxDecoration(
-                                          color: _currentName == 'All'
-                                              ? primaryColor
-                                              : _currentName == 'Ongoing'
-                                                  ? greenColor
-                                                  : lightPink,
-                                          shape: BoxShape.circle,
-                                        ),
+                                  child: GFProgressBar(
+                                    backgroundColor: whiteBgColor,
+                                    progressBarColor: primaryColor,
+                                    progressHeadType:
+                                        GFProgressHeadType.circular,
+                                    type: GFProgressType.circular,
+                                    percentage: 0.5,
+                                    radius: 100.0,
+                                    circleWidth: 12.0,
+                                    autoLive: true,
+                                    animation: true,
+                                    child: Text(
+                                      '50%',
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                      Row(
-                                        children: const [
-                                          Icon(
-                                            Icons.check_circle,
-                                            color: greenColor,
-                                            size: 20.0,
-                                          ),
-                                          SizedBox(width: 10),
-                                          Text(
-                                            '13 Tasks',
-                                            style: TextStyle(
-                                              color: textColor,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               ],

@@ -52,7 +52,7 @@ class NavigationServices {
             fontWeight: FontWeight.w600,
           ),
         ),
-        backgroundColor: blackColor,
+        backgroundColor: primaryColor,
         overflowAlignment: OverflowBarAlignment.start,
         elevation: 5.0,
         leading: const Icon(Icons.info, color: whiteColor),
@@ -62,7 +62,7 @@ class NavigationServices {
       ),
     );
     Future.delayed(
-      const Duration(seconds: 2),
+      const Duration(seconds: 3),
       () => scaffolKey.currentState!.hideCurrentMaterialBanner(),
     );
   }

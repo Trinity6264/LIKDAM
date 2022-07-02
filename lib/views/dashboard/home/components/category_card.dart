@@ -1,6 +1,8 @@
 import 'package:bloc_practice/navigation/nav.dart';
 import 'package:bloc_practice/routes/router.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/getwidget.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../constant/color_pallet.dart';
 
@@ -40,10 +42,10 @@ class CategoryCard extends StatelessWidget {
                         SizedBox(height: size.height * .015),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               'UI Design',
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                 color: blackColor,
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.w500,
@@ -51,7 +53,7 @@ class CategoryCard extends StatelessWidget {
                             ),
                             Text(
                               '20 Projects',
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                 color: textColor,
                                 fontWeight: FontWeight.w400,
                               ),
@@ -62,31 +64,18 @@ class CategoryCard extends StatelessWidget {
                         Row(
                           children: [
                             Expanded(
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    width: size.width * 0.2,
-                                    height: 2,
-                                    decoration: BoxDecoration(
-                                      color: lightPink,
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
-                                  Container(
-                                    width: double.infinity,
-                                    height: 3,
-                                    decoration: BoxDecoration(
-                                      color: lightPink.withOpacity(0.5),
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
-                                ],
+                              child: GFProgressBar(
+                                radius: 3,
+                                autoLive: true,
+                                animation: true,
+                                percentage: 0.9,
+                                progressBarColor: primaryColor,
                               ),
                             ),
                             const SizedBox(width: 10),
-                            const Text(
+                            Text(
                               '3/7',
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                 color: textColor,
                                 fontWeight: FontWeight.w500,
                               ),

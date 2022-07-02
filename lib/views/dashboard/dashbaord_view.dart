@@ -4,6 +4,7 @@ import 'package:bloc_practice/views/dashboard/favourite/favourite_view.dart';
 import 'package:bloc_practice/views/dashboard/home/home_view.dart';
 import 'package:bloc_practice/views/dashboard/profile/profile_view.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({Key? key}) : super(key: key);
@@ -15,19 +16,19 @@ class DashBoardScreen extends StatefulWidget {
 class _DashBoardScreenState extends State<DashBoardScreen> {
   static const _tabs = [
     BottomNavigationBarItem(
-      icon: Icon(Icons.home),
+      icon: Icon(FontAwesomeIcons.house),
       label: '',
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.today_outlined),
+      icon: Icon(FontAwesomeIcons.calendar),
       label: '',
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.star_outline_outlined),
+      icon: Icon(FontAwesomeIcons.star),
       label: '',
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.person),
+      icon: Icon(FontAwesomeIcons.user),
       label: '',
     ),
   ];
@@ -44,12 +45,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: whiteBgColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: primaryColor,
-        child: const Icon(Icons.add, color: whiteColor),
+        child: const Icon(FontAwesomeIcons.plus, color: whiteColor),
       ),
       body: IndexedStack(
         index: currentScreen,
@@ -63,7 +63,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         },
         items: _tabs,
         currentIndex: currentScreen,
-        backgroundColor: whiteColor,
         elevation: 5,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: primaryColor,

@@ -1,5 +1,7 @@
 import 'package:bloc_practice/constant/color_pallet.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'components/category_card.dart';
 import 'components/higher_progess_card.dart';
@@ -12,7 +14,6 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: whiteBgColor,
       body: SizedBox(
         width: double.infinity,
         child: Column(
@@ -28,25 +29,24 @@ class HomeView extends StatelessWidget {
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
                         'Welcome Back',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           color: textColor,
                           fontSize: 18.0,
                         ),
                       ),
                       Text(
                         'Trinity',
-                        style: TextStyle(
-                          color: blackColor,
+                        style: GoogleFonts.poppins(
                           fontSize: 20.0,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
                     ],
                   ),
-                  const Icon(Icons.notifications_outlined, color: textColor),
+                  const Icon(FontAwesomeIcons.bell, color: textColor),
                 ],
               ),
             ),
@@ -69,21 +69,12 @@ class HomeView extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 20),
       height: size.height * .05,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             title,
-            style: const TextStyle(
-              color: blackColor,
+            style: GoogleFonts.poppins(
               fontSize: 20.0,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const Text(
-            'View All',
-            style: TextStyle(
-              color: textColor,
-              fontSize: 16.0,
               fontWeight: FontWeight.w600,
             ),
           ),

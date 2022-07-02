@@ -1,0 +1,160 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:6924370605578254198",
+      "lastPropertyId": "8:2592753063072455303",
+      "name": "ProjectModel",
+      "properties": [
+        {
+          "id": "1:923883062907587588",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3773338440958967226",
+          "name": "projectTitle",
+          "type": 9
+        },
+        {
+          "id": "3:3117937746073828028",
+          "name": "projectDescription",
+          "type": 9
+        },
+        {
+          "id": "4:9159761921901698143",
+          "name": "projectStart",
+          "type": 10
+        },
+        {
+          "id": "5:4078341709163064756",
+          "name": "projectEnd",
+          "type": 10
+        },
+        {
+          "id": "6:5468530445108340258",
+          "name": "isCancel",
+          "type": 1
+        },
+        {
+          "id": "7:4096843003138886364",
+          "name": "userId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "1:912545853286075783",
+          "relationTarget": "UserModel"
+        },
+        {
+          "id": "8:2592753063072455303",
+          "name": "categoryId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "2:3412855859970755840",
+          "relationTarget": "CategoryModel"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:7975128368317523890",
+      "lastPropertyId": "5:3150105705961320694",
+      "name": "UserModel",
+      "properties": [
+        {
+          "id": "1:7785000072436260556",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1662957889903922519",
+          "name": "username",
+          "type": 9,
+          "flags": 2080,
+          "indexId": "3:7106867697336632219"
+        },
+        {
+          "id": "3:6708114939456310982",
+          "name": "password",
+          "type": 9
+        },
+        {
+          "id": "4:5716142099954337809",
+          "name": "role",
+          "type": 9
+        },
+        {
+          "id": "5:3150105705961320694",
+          "name": "userJoined",
+          "type": 10
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:2637969379473945590",
+      "lastPropertyId": "2:1361236983191956100",
+      "name": "CategoryModel",
+      "properties": [
+        {
+          "id": "1:6301856770923171633",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1361236983191956100",
+          "name": "name",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:5286426665128033510",
+      "lastPropertyId": "4:2289199971174911271",
+      "name": "TaskModel",
+      "properties": [
+        {
+          "id": "1:7891814206626453194",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8256764269003077873",
+          "name": "taskContent",
+          "type": 9
+        },
+        {
+          "id": "3:2282696118919747426",
+          "name": "isDone",
+          "type": 1
+        },
+        {
+          "id": "4:2289199971174911271",
+          "name": "projectId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "4:7016216962005333229",
+          "relationTarget": "ProjectModel"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "4:5286426665128033510",
+  "lastIndexId": "4:7016216962005333229",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

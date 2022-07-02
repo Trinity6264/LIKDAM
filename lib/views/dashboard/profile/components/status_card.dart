@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../constant/color_pallet.dart';
 
@@ -47,7 +48,7 @@ class StatusCard extends StatelessWidget {
                 const SizedBox(width: 15.0),
                 Text(
                   '$length',
-                  style: const TextStyle(
+                  style: GoogleFonts.poppins(
                     color: whiteColor,
                     fontSize: 35.0,
                     fontWeight: FontWeight.w600,

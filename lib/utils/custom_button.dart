@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../constant/color_pallet.dart';
 
@@ -25,7 +26,7 @@ class CustomButton extends StatelessWidget {
         child: Text(
           title,
           textAlign: TextAlign.center,
-          style: const TextStyle(
+          style: GoogleFonts.poppins(
             color: whiteColor,
             fontSize: 18.0,
             fontWeight: FontWeight.w500,

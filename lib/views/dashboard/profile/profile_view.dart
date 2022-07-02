@@ -1,39 +1,45 @@
 import 'package:bloc_practice/constant/color_pallet.dart';
+import 'package:bloc_practice/logic/cubit/custome_theme_state_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'components/status_card.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
 
-  static const colors = [
-    greenColor,
-    primaryColor,
-    cancelColor,
-    pendingColor,
-  ];
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: whiteBgColor,
       appBar: AppBar(
-        actionsIconTheme: const IconThemeData(
-          color: blackColor,
-        ),
         elevation: 0,
         automaticallyImplyLeading: false,
         backgroundColor: whiteBgColor,
+        actionsIconTheme: const IconThemeData(
+          color: blackColor,
+        ),
         title: const Text(
           'Profile',
           style: TextStyle(
-            color: blackColor,
             fontSize: 30.0,
             fontWeight: FontWeight.bold,
+            color: blackColor,
           ),
         ),
         actions: [
+          IconButton(
+            onPressed: () {
+              context.read<CustomeThemeStateCubit>().changeTheme();
+            },
+            icon: FaIcon(
+              !context.watch<CustomeThemeStateCubit>().isDay
+                  ? Icons.sunny
+                  : FontAwesomeIcons.moon,
+            ),
+          ),
           PopupMenuButton(
             color: whiteColor,
             itemBuilder: (_) {
@@ -62,18 +68,17 @@ class ProfileView extends StatelessWidget {
               ),
             ),
             SizedBox(height: size.height * .02),
-            const Text(
+            Text(
               'Trinity',
-              style: TextStyle(
-                color: blackColor,
+              style: GoogleFonts.poppins(
                 fontSize: 28.0,
                 fontWeight: FontWeight.w600,
               ),
             ),
             SizedBox(height: size.height * .01),
-            const Text(
+            Text(
               'Mobile Developer',
-              style: TextStyle(
+              style: GoogleFonts.poppins(
                 color: textColor,
                 fontSize: 18.0,
                 fontWeight: FontWeight.w600,
@@ -85,11 +90,11 @@ class ProfileView extends StatelessWidget {
                 primary: primaryColor,
               ),
               onPressed: () {},
-              child: const Padding(
-                padding: EdgeInsets.all(10.0),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
                 child: Text(
                   'Edit Profile',
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -102,9 +107,9 @@ class ProfileView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Project overview',
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w600,
                       fontSize: 20,
                     ),
@@ -125,7 +130,7 @@ class ProfileView extends StatelessWidget {
                         size: size,
                         colors: primaryColor,
                         length: 16,
-                        iconData: Icons.access_time_rounded,
+                        iconData: FontAwesomeIcons.wifi,
                         onPressed: () {},
                         title: 'Ongoing Projects',
                       ),
@@ -139,7 +144,7 @@ class ProfileView extends StatelessWidget {
                         size: size,
                         colors: cancelColor,
                         length: 50,
-                        iconData: Icons.cancel_outlined,
+                        iconData: FontAwesomeIcons.ban,
                         onPressed: () {},
                         title: 'Canceled Projects',
                       ),
@@ -147,7 +152,7 @@ class ProfileView extends StatelessWidget {
                         size: size,
                         colors: pendingColor,
                         length: 12,
-                        iconData: Icons.stacked_line_chart,
+                        iconData: FontAwesomeIcons.circleChevronDown,
                         onPressed: () {},
                         title: 'Pending Projects',
                       ),
