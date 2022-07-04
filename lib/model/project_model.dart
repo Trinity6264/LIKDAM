@@ -15,7 +15,10 @@ class ProjectModel {
   DateTime projectStart;
   @Property(type: PropertyType.date)
   DateTime projectEnd;
+  @Property(type: PropertyType.date)
+  DateTime projectUpdate;
   bool isCancel;
+  bool isfavourite;
 
 // Relation
   final user = ToOne<UserModel>();
@@ -29,7 +32,9 @@ class ProjectModel {
     required this.projectDescription,
     required this.projectStart,
     required this.projectEnd,
+    required this.projectUpdate,
     required this.isCancel,
+    required this.isfavourite,
   });
 
   ProjectModel copyWith({
@@ -38,7 +43,9 @@ class ProjectModel {
     String? projectDescription,
     DateTime? projectStart,
     DateTime? projectEnd,
+    DateTime? projectUpdate,
     bool? isCancel,
+    bool? isfavourite,
   }) {
     return ProjectModel(
       id: id ?? this.id,
@@ -46,7 +53,9 @@ class ProjectModel {
       projectDescription: projectDescription ?? this.projectDescription,
       projectStart: projectStart ?? this.projectStart,
       projectEnd: projectEnd ?? this.projectEnd,
+      projectUpdate: projectUpdate ?? this.projectUpdate,
       isCancel: isCancel ?? this.isCancel,
+      isfavourite: isfavourite ?? this.isfavourite,
     );
   }
 
@@ -57,7 +66,9 @@ class ProjectModel {
       'projectDescription': projectDescription,
       'projectStart': projectStart.millisecondsSinceEpoch,
       'projectEnd': projectEnd.millisecondsSinceEpoch,
+      'projectUpdate': projectUpdate.millisecondsSinceEpoch,
       'isCancel': isCancel,
+      'isfavourite': isfavourite,
     };
   }
 
@@ -68,7 +79,9 @@ class ProjectModel {
       projectDescription: map['projectDescription'] ?? '',
       projectStart: DateTime.fromMillisecondsSinceEpoch(map['projectStart']),
       projectEnd: DateTime.fromMillisecondsSinceEpoch(map['projectEnd']),
+      projectUpdate: DateTime.fromMillisecondsSinceEpoch(map['projectUpdate']),
       isCancel: map['isCancel'] ?? false,
+      isfavourite: map['isfavourite'] ?? false,
     );
   }
 
@@ -78,7 +91,7 @@ class ProjectModel {
 
   @override
   String toString() {
-    return 'ProjectModel(id: $id, projectTitle: $projectTitle, projectDescription: $projectDescription, projectStart: $projectStart, projectEnd: $projectEnd, isCancel: $isCancel)';
+    return 'ProjectModel(id: $id, projectTitle: $projectTitle, projectDescription: $projectDescription, projectStart: $projectStart, projectEnd: $projectEnd, projectUpdate: $projectUpdate, isCancel: $isCancel, isfavourite: $isfavourite)';
   }
 
   @override
@@ -91,7 +104,9 @@ class ProjectModel {
       other.projectDescription == projectDescription &&
       other.projectStart == projectStart &&
       other.projectEnd == projectEnd &&
-      other.isCancel == isCancel;
+      other.projectUpdate == projectUpdate &&
+      other.isCancel == isCancel &&
+      other.isfavourite == isfavourite;
   }
 
   @override
@@ -101,6 +116,8 @@ class ProjectModel {
       projectDescription.hashCode ^
       projectStart.hashCode ^
       projectEnd.hashCode ^
-      isCancel.hashCode;
+      projectUpdate.hashCode ^
+      isCancel.hashCode ^
+      isfavourite.hashCode;
   }
 }

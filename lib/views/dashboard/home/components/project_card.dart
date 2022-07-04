@@ -1,5 +1,5 @@
 import 'package:bloc_practice/routes/router.dart';
-import 'package:bloc_practice/service/service_locator.dart';
+import 'package:bloc_practice/locator/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/getwidget.dart';

@@ -1,14 +1,20 @@
 import 'package:bloc_practice/constant/color_pallet.dart';
 import 'package:bloc_practice/logic/cubit/custome_theme_state_cubit.dart';
+import 'package:bloc_practice/routes/router.dart';
+import 'package:bloc_practice/locator/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../navigation/nav.dart';
+import '../../../service/shared_prefs.dart';
 import 'components/status_card.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
+  static final _navService = locator<NavigationServices>();
+  static final _prefs = locator<SharedPrefs>();
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +51,19 @@ class ProfileView extends StatelessWidget {
             itemBuilder: (_) {
               return [
                 PopupMenuItem(
-                  onTap: () {
-                    debugPrint('Whip');
+                  onTap: () async {
+                    await _prefs.clear().then(
+                      (value) async {
+                        Future.delayed(
+                          const Duration(),
+                          () async {
+                            _navService.showBanner('Logout successfully');
+                            return await _navService
+                                .replaceStack(Routers.authScreen);
+                          },
+                        );
+                      },
+                    );
                   },
                   child: const Text('Logout'),
                 ),

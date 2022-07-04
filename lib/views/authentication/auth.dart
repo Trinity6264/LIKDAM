@@ -43,8 +43,8 @@ class AuthScreen extends StatelessWidget {
                     'Manage your daily task with Likdam',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.poppins(
-                      fontSize: 40.0,
-                      wordSpacing: 4.5,
+                      fontSize: 30.0,
+                      wordSpacing: 2.5,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -54,7 +54,7 @@ class AuthScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: GoogleFonts.poppins(
                       color: textColor,
-                      fontSize: 18.0,
+                      fontSize: 16.0,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -65,7 +65,7 @@ class AuthScreen extends StatelessWidget {
                     ),
                     title: 'Register',
                   ),
-                  SizedBox(height: size.height * .03),
+                  SizedBox(height: size.height * .05),
                   RichText(
                     text: TextSpan(
                       children: [

@@ -24,7 +24,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 6924370605578254198),
       name: 'ProjectModel',
-      lastPropertyId: const IdUid(8, 2592753063072455303),
+      lastPropertyId: const IdUid(10, 8712191440775644190),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -70,7 +70,17 @@ final _entities = <ModelEntity>[
             type: 11,
             flags: 520,
             indexId: const IdUid(2, 3412855859970755840),
-            relationTarget: 'CategoryModel')
+            relationTarget: 'CategoryModel'),
+        ModelProperty(
+            id: const IdUid(9, 5848216726645678573),
+            name: 'isfavourite',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(10, 8712191440775644190),
+            name: 'projectUpdate',
+            type: 10,
+            flags: 0)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[
@@ -216,7 +226,7 @@ ModelDefinition getObjectBoxModel() {
           final projectTitleOffset = fbb.writeString(object.projectTitle);
           final projectDescriptionOffset =
               fbb.writeString(object.projectDescription);
-          fbb.startTable(9);
+          fbb.startTable(11);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, projectTitleOffset);
           fbb.addOffset(2, projectDescriptionOffset);
@@ -225,6 +235,8 @@ ModelDefinition getObjectBoxModel() {
           fbb.addBool(5, object.isCancel);
           fbb.addInt64(6, object.user.targetId);
           fbb.addInt64(7, object.category.targetId);
+          fbb.addBool(8, object.isfavourite);
+          fbb.addInt64(9, object.projectUpdate.millisecondsSinceEpoch);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -242,8 +254,12 @@ ModelDefinition getObjectBoxModel() {
                   const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0)),
               projectEnd: DateTime.fromMillisecondsSinceEpoch(
                   const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0)),
+              projectUpdate: DateTime.fromMillisecondsSinceEpoch(
+                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 22, 0)),
               isCancel: const fb.BoolReader()
-                  .vTableGet(buffer, rootOffset, 14, false));
+                  .vTableGet(buffer, rootOffset, 14, false),
+              isfavourite:
+                  const fb.BoolReader().vTableGet(buffer, rootOffset, 20, false));
           object.user.targetId =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0);
           object.user.attach(store);
@@ -412,6 +428,14 @@ class ProjectModel_ {
   /// see [ProjectModel.category]
   static final category = QueryRelationToOne<ProjectModel, CategoryModel>(
       _entities[0].properties[7]);
+
+  /// see [ProjectModel.isfavourite]
+  static final isfavourite =
+      QueryBooleanProperty<ProjectModel>(_entities[0].properties[8]);
+
+  /// see [ProjectModel.projectUpdate]
+  static final projectUpdate =
+      QueryIntegerProperty<ProjectModel>(_entities[0].properties[9]);
 }
 
 /// [UserModel] entity fields to define ObjectBox queries.

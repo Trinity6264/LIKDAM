@@ -14,6 +14,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SizedBox(
         width: double.infinity,
         child: Column(

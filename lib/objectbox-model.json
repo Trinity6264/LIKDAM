@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:6924370605578254198",
-      "lastPropertyId": "8:2592753063072455303",
+      "lastPropertyId": "10:8712191440775644190",
       "name": "ProjectModel",
       "properties": [
         {
@@ -54,6 +54,16 @@
           "flags": 520,
           "indexId": "2:3412855859970755840",
           "relationTarget": "CategoryModel"
+        },
+        {
+          "id": "9:5848216726645678573",
+          "name": "isfavourite",
+          "type": 1
+        },
+        {
+          "id": "10:8712191440775644190",
+          "name": "projectUpdate",
+          "type": 10
         }
       ],
       "relations": []

@@ -16,7 +16,7 @@ class NavigationServices {
   }
 
   Future<dynamic> replaceStack(String routeName) {
-    return navigationKey.currentState!.pushReplacementNamed(routeName);
+    return navigationKey.currentState!.popAndPushNamed(routeName);
   }
 
   void back() {

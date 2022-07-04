@@ -1,10 +1,12 @@
 import 'package:bloc_practice/logic/auth/login/cubit/login_cubit.dart';
 import 'package:bloc_practice/logic/auth/new_account/cubit/create_new_user_cubit.dart';
 import 'package:bloc_practice/logic/cubit/custome_theme_state_cubit.dart';
+import 'package:bloc_practice/logic/date/end/cubit/end_date_cubit.dart';
+import 'package:bloc_practice/logic/date/start/cubit/startdate_cubit.dart';
 import 'package:bloc_practice/navigation/nav.dart';
 import 'package:bloc_practice/routes/router.dart';
 import 'package:bloc_practice/service/0b_service.dart';
-import 'package:bloc_practice/service/service_locator.dart';
+import 'package:bloc_practice/locator/service_locator.dart';
 import 'package:bloc_practice/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,6 +32,12 @@ void main() async {
         BlocProvider<LoginCubit>(
           create: (context) => LoginCubit(),
         ),
+        BlocProvider<StartdateCubit>(
+          create: (context) => StartdateCubit(),
+        ),
+        BlocProvider<EndDateCubit>(
+          create: (context) => EndDateCubit(),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -54,7 +62,7 @@ class MyApp extends StatelessWidget {
       darkTheme: _locatorTheme.darkTheme,
       navigatorKey: navigationKey,
       scaffoldMessengerKey: scaffolKey,
-      initialRoute: Routers.authScreen,
+      initialRoute: Routers.splashScreen,
       onGenerateRoute: Routers.onGenerateRoutes,
     );
   }

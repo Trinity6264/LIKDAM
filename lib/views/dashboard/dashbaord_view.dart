@@ -3,6 +3,8 @@ import 'package:bloc_practice/views/dashboard/calendar/calendar_view.dart';
 import 'package:bloc_practice/views/dashboard/favourite/favourite_view.dart';
 import 'package:bloc_practice/views/dashboard/home/home_view.dart';
 import 'package:bloc_practice/views/dashboard/profile/profile_view.dart';
+import 'package:bloc_practice/views/dashboard/projects/add_project.dart';
+import 'package:bloc_practice/views/dashboard/projects/project.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -45,9 +47,18 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            isDismissible: false,
+            enableDrag: false,
+            builder: (_) => Project(),
+          );
+        },
         backgroundColor: primaryColor,
         child: const Icon(FontAwesomeIcons.plus, color: whiteColor),
       ),

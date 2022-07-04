@@ -1,7 +1,7 @@
 import 'package:bloc_practice/constant/color_pallet.dart';
 import 'package:bloc_practice/logic/auth/new_account/cubit/create_new_user_cubit.dart';
 import 'package:bloc_practice/model/user_model.dart';
-import 'package:bloc_practice/service/service_locator.dart';
+import 'package:bloc_practice/locator/service_locator.dart';
 import 'package:bloc_practice/utils/custom_button.dart';
 import 'package:bloc_practice/utils/custom_textfield.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +22,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   late TextEditingController passwordController;
   late TextEditingController roleController;
 
+  late FocusNode usernameNode;
+  late FocusNode passwordNode;
+  late FocusNode roleNode;
+
   final _service = locator.get<NavigationServices>();
 
   @override
@@ -29,6 +33,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
     usernameController = TextEditingController();
     passwordController = TextEditingController();
     roleController = TextEditingController();
+    // nodes
+    usernameNode = FocusNode();
+    passwordNode = FocusNode();
+    roleNode = FocusNode();
     super.initState();
   }
 
@@ -38,10 +46,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
     usernameController.dispose();
     passwordController.dispose();
     roleController.dispose();
+    usernameNode.dispose();
+    passwordNode.dispose();
+    roleNode.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    print('object');
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: whiteColor,
@@ -80,16 +92,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   CustomTextField(
+                    focusNode: usernameNode,
                     controller: usernameController,
                     hintText: 'Username',
                   ),
                   SizedBox(height: size.height * .04),
                   CustomTextField(
+                    focusNode: passwordNode,
                     controller: passwordController,
                     hintText: 'Password',
                   ),
                   SizedBox(height: size.height * .04),
                   CustomTextField(
+                    focusNode: roleNode,
                     controller: roleController,
                     hintText: 'Role',
                   ),
@@ -123,7 +138,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               role: roleController.text.trim(),
                               userJoined: DateTime.now(),
                             );
-
+                            usernameNode.unfocus();
+                            passwordNode.unfocus();
+                            roleNode.unfocus();
                             context.read<CreateNewUserCubit>().createUser(
                                   userModel,
                                 );

@@ -1,7 +1,7 @@
 import 'package:bloc_practice/constant/color_pallet.dart';
 import 'package:bloc_practice/navigation/nav.dart';
 import 'package:bloc_practice/routes/router.dart';
-import 'package:bloc_practice/service/service_locator.dart';
+import 'package:bloc_practice/locator/service_locator.dart';
 import 'package:bloc_practice/utils/custom_button.dart';
 import 'package:bloc_practice/utils/custom_textfield.dart';
 import 'package:flutter/material.dart';
@@ -142,6 +142,7 @@ class LoginScreenState extends State<LoginScreen> {
                           context.read<LoginCubit>().loginUser(
                                 username: usernameController.text.trim(),
                                 password: passwordController.text.trim(),
+                                value: isKeepLogin,
                               );
                         },
                         title: 'Login',

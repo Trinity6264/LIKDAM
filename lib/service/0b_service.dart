@@ -1,5 +1,6 @@
 import 'package:bloc_practice/model/user_model.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:getwidget/components/search_bar/gf_search_bar.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -42,13 +43,22 @@ class ObService {
 
   Future<dynamic> createNewUser({required UserModel userModel}) async {
     try {
+      // this piece of code checks the box if the username exist
+      final res = _store
+          .box<UserModel>()
+          .query(
+            UserModel_.username.equals(userModel.username),
+          )
+          .build()
+          .count();
+      if (res == 1) {
+        return 'Username already exist';
+      }
       final userBox = _store.box<UserModel>().put(userModel);
       return userBox;
     } on ObjectBoxException catch (e) {
-      final error = e.message.substring(7, 10);
-      if (error == 'put') {
-        return 'Username already exist';
-      }
+      return e.message;
+    } on PlatformException catch (e) {
       return e.message;
     } catch (e) {
       return e.toString();
@@ -78,7 +88,6 @@ class ObService {
             .build()
             .count();
         if (res == 1) {
-          print('ppppppppp');
           return res;
         } else {
           return 'Password is incorrect';
