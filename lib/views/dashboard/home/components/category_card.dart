@@ -46,7 +46,6 @@ class CategoryCard extends StatelessWidget {
                             Text(
                               'UI Design',
                               style: GoogleFonts.poppins(
-                                color: blackColor,
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.w500,
                               ),

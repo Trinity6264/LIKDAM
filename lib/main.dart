@@ -1,8 +1,13 @@
+
 import 'package:bloc_practice/logic/auth/login/cubit/login_cubit.dart';
 import 'package:bloc_practice/logic/auth/new_account/cubit/create_new_user_cubit.dart';
 import 'package:bloc_practice/logic/cubit/custome_theme_state_cubit.dart';
-import 'package:bloc_practice/logic/date/end/cubit/end_date_cubit.dart';
-import 'package:bloc_practice/logic/date/start/cubit/startdate_cubit.dart';
+import '../../../logic/Projects/cubit/add_project_cubit.dart';
+import '../../../logic/Projects/end/cubit/end_date_cubit.dart';
+import '../../../logic/Projects/start/cubit/startdate_cubit.dart';
+import '../../../logic/Projects/textForm/category/cubit/category_cubit.dart';
+import '../../../logic/Projects/textForm/description/cubit/description_cubit.dart';
+import '../../../logic/Projects/textForm/title/title_cubit.dart';
 import 'package:bloc_practice/navigation/nav.dart';
 import 'package:bloc_practice/routes/router.dart';
 import 'package:bloc_practice/service/0b_service.dart';
@@ -11,7 +16,6 @@ import 'package:bloc_practice/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'service/shared_prefs.dart';
 
 void main() async {
@@ -32,11 +36,23 @@ void main() async {
         BlocProvider<LoginCubit>(
           create: (context) => LoginCubit(),
         ),
-        BlocProvider<StartdateCubit>(
+         BlocProvider<StartdateCubit>(
           create: (context) => StartdateCubit(),
         ),
         BlocProvider<EndDateCubit>(
           create: (context) => EndDateCubit(),
+        ),
+        BlocProvider<AddProjectCubit>(
+          create: (context) => AddProjectCubit(),
+        ),
+        BlocProvider<TitleCubit>(
+          create: (context) => TitleCubit(),
+        ),
+        BlocProvider<DescriptionCubit>(
+          create: (context) => DescriptionCubit(),
+        ),
+        BlocProvider<CategoryCubit>(
+          create: (context) => CategoryCubit(),
         ),
       ],
       child: const MyApp(),

@@ -1,6 +1,10 @@
-import 'package:bloc_practice/constant/color_pallet.dart';
+import 'package:bloc_practice/locator/service_locator.dart';
 import 'package:bloc_practice/views/dashboard/projects/add_project.dart';
+import 'package:bloc_practice/views/dashboard/projects/add_task.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../navigation/nav.dart';
 
 class Project extends StatefulWidget {
   Project({Key? key}) : super(key: key);
@@ -30,13 +34,27 @@ class _ProjectState extends State<Project> {
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
-      physics: const NeverScrollableScrollPhysics(),
-      controller: pageCtrl,
-      children: [
-        AddProjects(pageCtrl: pageCtrl),
-        Container(color: greenColor),
-      ],
+    return WillPopScope(
+      onWillPop: () async {
+        if (pageCtrl.page == 1) {
+          pageCtrl.animateToPage(
+            0,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.ease,
+          );
+        } else {
+          locator.get<NavigationServices>().back();
+        }
+        return false;
+      },
+      child: PageView(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: pageCtrl,
+        children: [
+          AddProjects(pageCtrl: pageCtrl),
+          AddTask(controller: pageCtrl),
+        ],
+      ),
     );
   }
 }
