@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:bloc_practice/constant/color_pallet.dart';
 import 'package:bloc_practice/utils/labeltxt.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../logic/Projects/cubit/add_project_cubit.dart';
@@ -34,9 +35,17 @@ class _AddProjectsState extends State<AddProjects> {
 
   @override
   void initState() {
+    final start = context.read<StartdateCubit>().startDate;
+    final end = context.read<EndDateCubit>().endDate;
+    final cat = context.read<AddProjectCubit>().data;
     startDate = DateTime.now();
     endDate = DateTime.now();
-
+    context.read<StartdateCubit>().initialDate(start ?? startDate!);
+    context.read<AddProjectCubit>().selectCategory(cat ?? 'Mobile UI Design');
+    context.read<EndDateCubit>().initialDate(end?.subtract(
+          const Duration(days: 1),
+        ) ??
+        endDate!);
     titleFocus = FocusNode();
     descriptionFocus = FocusNode();
     catFocus = FocusNode();
@@ -63,6 +72,7 @@ class _AddProjectsState extends State<AddProjects> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -85,22 +95,23 @@ class _AddProjectsState extends State<AddProjects> {
                     BlocBuilder<TitleCubit, TitleState>(
                       builder: (context, state) {
                         return TextFormField(
-                            keyboardType: TextInputType.name,
-                            initialValue:
-                                state is TitleUpdated ? state.title : '',
-                            focusNode: titleFocus,
-                            textInputAction: TextInputAction.next,
-                            onChanged: (val) {
-                              context.read<TitleCubit>().updateText(val);
-                            },
-                            validator: (val) {
-                              if (val!.isEmpty || val == '') {
-                                return 'Project title required';
-                              } else {
-                                return null;
-                              }
-                            },
-                            decoration: inputDec);
+                          keyboardType: TextInputType.name,
+                          initialValue:
+                              state is TitleUpdated ? state.title : '',
+                          focusNode: titleFocus,
+                          textInputAction: TextInputAction.next,
+                          onChanged: (val) {
+                            context.read<TitleCubit>().updateText(val);
+                          },
+                          validator: (val) {
+                            if (val!.isEmpty || val == '') {
+                              return 'Project title required';
+                            } else {
+                              return null;
+                            }
+                          },
+                          decoration: inputDec,
+                        );
                       },
                     ),
                     SizedBox(height: size.height * .02),
@@ -276,7 +287,7 @@ class _AddProjectsState extends State<AddProjects> {
                       return;
                     }
                   },
-                  child: const Text('Create Project'),
+                  child: const Text('Add Project'),
                 ),
               ),
             ),

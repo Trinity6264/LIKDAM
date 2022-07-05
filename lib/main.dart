@@ -16,6 +16,7 @@ import 'package:bloc_practice/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'logic/Projects/task/addTask/cubit/add_task_cubit.dart';
 import 'service/shared_prefs.dart';
 
 void main() async {
@@ -54,6 +55,11 @@ void main() async {
         BlocProvider<CategoryCubit>(
           create: (context) => CategoryCubit(),
         ),
+        BlocProvider<AddTaskCubit>(
+          create: (context) => AddTaskCubit(),
+        ),
+   
+        
       ],
       child: const MyApp(),
     ),

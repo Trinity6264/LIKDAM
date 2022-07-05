@@ -12,8 +12,17 @@ class EndDateCubit extends Cubit<EndDateState> {
 
   final _datePicker = locator.get<UtilsService>();
 
+  DateTime? endDate;
+
+  void initialDate(DateTime dateTime) {
+    endDate = dateTime.add(const Duration(days: 1));
+    emit(EndDatePicked(dateTime: endDate!));
+    return;
+  }
+
   Future<void> pickDate(BuildContext context, DateTime dateTime) async {
     final date = await _datePicker.pickDate(context, dateTime);
+    endDate = date;
     if (date != null) {
       emit(EndDatePicked(dateTime: date));
       return;
