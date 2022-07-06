@@ -4,8 +4,12 @@ import 'package:bloc_practice/logic/Projects/cubit/add_project_cubit.dart';
 import 'package:bloc_practice/logic/Projects/end/cubit/end_date_cubit.dart';
 import 'package:bloc_practice/logic/Projects/start/cubit/startdate_cubit.dart';
 import 'package:bloc_practice/logic/Projects/task/addTask/cubit/add_task_cubit.dart';
+import 'package:bloc_practice/logic/Projects/task/createProject/cubit/create_project_cubit.dart';
 import 'package:bloc_practice/logic/Projects/textForm/description/cubit/description_cubit.dart';
 import 'package:bloc_practice/logic/Projects/textForm/title/title_cubit.dart';
+import 'package:bloc_practice/model/category_model.dart';
+import 'package:bloc_practice/model/project_model.dart';
+import 'package:bloc_practice/model/task_model.dart';
 import 'package:bloc_practice/navigation/nav.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -209,13 +213,30 @@ class _AddTaskState extends State<AddTask> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
+                    final createProject = context.read<CreateProjectCubit>();
                     final checking =
                         category.data == 'Other' ? text.data : category.data;
-                    print(title.data);
-                    print(description.description);
-                    print(checking);
-                    print(startDate.startDate);
-                    print(endDate.endDate);
+                    // print(title.data);
+                    // print(description.description);
+                    // print(checking);
+                    // print(startDate.startDate);
+                    // print(endDate.endDate);
+                    final cat = CategoryModel(name: checking.toString());
+                    final project = ProjectModel(
+                      projectTitle: title.data,
+                      projectDescription: description.description,
+                      projectStart: startDate.startDate!,
+                      projectEnd: endDate.endDate!,
+                      projectUpdate: startDate.startDate!,
+                      isCancel: false,
+                      isfavourite: false,
+                    );
+                    final task = context.read<AddTaskCubit>();
+                    createProject.createProject(
+                      taskModel: task.allTask,
+                      projectModel: project,
+                      categoryModel: cat,
+                    );
                   },
                   child: const Text('Create Project'),
                 ),

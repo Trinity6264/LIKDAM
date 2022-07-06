@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'logic/Projects/task/addTask/cubit/add_task_cubit.dart';
+import 'logic/Projects/task/createProject/cubit/create_project_cubit.dart';
 import 'service/shared_prefs.dart';
 
 void main() async {
@@ -57,6 +58,9 @@ void main() async {
         ),
         BlocProvider<AddTaskCubit>(
           create: (context) => AddTaskCubit(),
+        ),
+        BlocProvider<CreateProjectCubit>(
+          create: (context) => CreateProjectCubit(),
         ),
    
         

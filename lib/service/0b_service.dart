@@ -1,7 +1,9 @@
+import 'package:bloc_practice/model/category_model.dart';
+import 'package:bloc_practice/model/project_model.dart';
+import 'package:bloc_practice/model/task_model.dart';
 import 'package:bloc_practice/model/user_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:getwidget/components/search_bar/gf_search_bar.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -98,5 +100,53 @@ class ObService {
     } catch (e) {
       return e;
     }
+  }
+
+  // TODO: Note Crud Operation
+
+  Future<dynamic> createProject({
+    required ProjectModel projectModel,
+    required CategoryModel categoryModel,
+    required TaskModel taskModel,
+  }) async {
+    try {
+      final category = categoryModel;
+      final project = projectModel;
+      // creating a relation
+      project.category.target = category;
+      final task = taskModel;
+      task.project.target = project;
+      final taskBox = _store.box<TaskModel>().put(taskModel);
+      return taskBox;
+    } on ObjectBoxException catch (e) {
+      return e.message;
+    } on PlatformException catch (e) {
+      return e.message;
+    }
+  }
+  // fetching category
+
+  Future<dynamic> getAllCategory() async {
+    try {
+      final taskBox = _store.box<CategoryModel>().getAll();
+      return taskBox;
+    } catch (e) {}
+  }
+  // fetching project
+
+  Future<dynamic> getAllProject() async {
+    try {
+      final taskBox = _store.box<ProjectModel>().get(1)!.task;
+      return taskBox;
+    } catch (e) {}
+  }
+
+  Future<dynamic> getAllTask() async {
+    try {
+      final taskBox =
+          await _store.box<TaskModel>().get(1)!.project.target!.user;
+
+      return taskBox.targetId;
+    } catch (e) {}
   }
 }

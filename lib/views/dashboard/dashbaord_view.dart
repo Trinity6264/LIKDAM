@@ -1,4 +1,6 @@
 import 'package:bloc_practice/constant/color_pallet.dart';
+import 'package:bloc_practice/locator/service_locator.dart';
+import 'package:bloc_practice/service/0b_service.dart';
 import 'package:bloc_practice/views/dashboard/calendar/calendar_view.dart';
 import 'package:bloc_practice/views/dashboard/favourite/favourite_view.dart';
 import 'package:bloc_practice/views/dashboard/home/home_view.dart';
@@ -50,7 +52,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       resizeToAvoidBottomInset: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
+          final data = await locator.get<ObService>().getAllProject();
+          print(data);
           showModalBottomSheet(
             context: context,
             isScrollControlled: true,
