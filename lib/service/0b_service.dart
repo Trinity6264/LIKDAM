@@ -116,7 +116,7 @@ class ObService {
       project.category.target = category;
       final task = taskModel;
       task.project.target = project;
-      final taskBox = _store.box<TaskModel>().put(taskModel);
+      final taskBox = await _store.box<TaskModel>().put(taskModel);
       return taskBox;
     } on ObjectBoxException catch (e) {
       return e.message;
@@ -134,11 +134,17 @@ class ObService {
   }
   // fetching project
 
-  Future<dynamic> getAllProject() async {
+  Stream<List<ProjectModel>> getAllProject()  {
     try {
-      final taskBox = _store.box<ProjectModel>().get(1)!.task;
+      final taskBox = _store
+          .box<ProjectModel>()
+          .query()
+          .watch(triggerImmediately: true)
+          .map((project) => project.find());
       return taskBox;
-    } catch (e) {}
+    } catch (e) {
+      throw e.toString();
+    }
   }
 
   Future<dynamic> getAllTask() async {
